@@ -58,10 +58,10 @@ public class ItemHandler implements Listener {
         ItemStack itemStack = new ItemStack(Material.INK_SACK);
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (visibilityPlayer.getState() == VisibleState.ALL) {
-            itemStack.setData(new Dye(DyeColor.LIME));
+            itemStack.setDurability(DyeColor.LIME.getDyeData());
             itemMeta.setDisplayName(ChatColor.GREEN + "Players VISIBLE " + ChatColor.GRAY + "(Click to hide)");
         } else {
-            itemStack.setData(new Dye(DyeColor.GRAY));
+            itemStack.setDurability(DyeColor.GRAY.getDyeData());
             itemMeta.setDisplayName(ChatColor.GREEN + "Players HIDDEN " + ChatColor.GRAY + "(Click to show)");
         }
         itemStack.setItemMeta(itemMeta);
