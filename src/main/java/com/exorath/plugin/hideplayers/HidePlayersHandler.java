@@ -21,6 +21,7 @@ import com.exorath.service.hideplayers.res.Success;
 import com.exorath.service.hideplayers.res.VisibilityPlayer;
 import com.exorath.service.hideplayers.res.VisibleState;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -51,7 +52,7 @@ public class HidePlayersHandler implements Listener {
                 entry.getKey().hidePlayer(event.getPlayer());
 
         String uuid = event.getPlayer().getUniqueId().toString();
-        Observable.<VisibilityPlayer>create(sub -> hidePlayersServiceAPI.getVisibilityPlayer(uuid))
+        Single.<VisibilityPlayer>create(sub -> sub.onSuccess(hidePlayersServiceAPI.getVisibilityPlayer(uuid)))
                 .subscribeOn(Schedulers.io()).subscribe(visibilityPlayer -> {
             Bukkit.getScheduler().runTask(Main.getInstance(), () -> handlePlayer(event.getPlayer(), visibilityPlayer));
         });
