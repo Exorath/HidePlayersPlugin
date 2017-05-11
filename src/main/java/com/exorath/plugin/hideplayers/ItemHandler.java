@@ -55,17 +55,19 @@ public class ItemHandler implements Listener {
     }
 
     private ItemStack getItem(Player player, VisibilityPlayer visibilityPlayer) {
-        ItemStack itemStack = new ItemStack(Material.INK_SACK);
-        ItemMeta itemMeta = itemStack.getItemMeta();
         if (visibilityPlayer.getState() == VisibleState.ALL) {
-            itemStack.setDurability(DyeColor.LIME.getDyeData());
-            itemMeta.setDisplayName(ChatColor.GREEN + "Players VISIBLE " + ChatColor.GRAY + "(Click to hide)");
+            ItemStack itemStack = new ItemStack(Material.INK_SACK, 1, (short) 0, (byte) DyeColor.LIME.getDyeData());
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.setDisplayName(ChatColor.GREEN + "Click to Hide Players" + ChatColor.GRAY + "(Players Visible)");
+            itemStack.setItemMeta(itemMeta);
+            return itemStack;
         } else {
-            itemStack.setDurability(DyeColor.GRAY.getDyeData());
-            itemMeta.setDisplayName(ChatColor.GREEN + "Players HIDDEN " + ChatColor.GRAY + "(Click to show)");
+            ItemStack itemStack = new ItemStack(Material.INK_SACK, 1, (short) 0, (byte) DyeColor.GRAY.getDyeData());
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            itemMeta.setDisplayName(ChatColor.GREEN + "Click to Show Players " + ChatColor.GRAY + "(Players Invisible)");
+            itemStack.setItemMeta(itemMeta);
+            return itemStack;
         }
-        itemStack.setItemMeta(itemMeta);
-        return itemStack;
     }
 
     @EventHandler
